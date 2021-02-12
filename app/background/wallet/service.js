@@ -4,7 +4,6 @@ import path from 'path';
 import { app } from 'electron';
 import rimraf from 'rimraf';
 import crypto from 'crypto';
-import { Amount } from 'hsd/lib/ui';
 import { ConnectionTypes, getConnection } from '../connections/service';
 import { dispatchToMainWindow } from '../../mainWindow';
 import { NETWORKS } from '../../constants/networks';
@@ -198,12 +197,7 @@ class WalletService {
     const initChange = 0;
     const initReceive = 0;
     const b = this.node.wdb.db.batch();
-
-    // account.changeDepth = changeDepth;
-    // account.receiveDepth = receiveDepth;
-    // await account.save(b);
-
-
+    
     if (changeDepth) {
       for (let i = initChange; i < changeDepth; i++) {
         const key = account.deriveChange(i);
@@ -254,7 +248,6 @@ class WalletService {
       payload: uniq([...wids, name]),
     });
 
-    // this.rescan(0);
     return res;
   };
 
